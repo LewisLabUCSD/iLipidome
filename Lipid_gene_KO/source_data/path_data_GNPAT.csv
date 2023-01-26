@@ -1,0 +1,7 @@
+"path","from","to","score","cal_score","Type","Significant","rep_sub_path"
+"G3P --> DHAP --> Acyl-DHAP --> Alkyl-DHAP --> LPA O- --> PA O- --> DAG O- --> PE O- --> LPE O-","G3P","LPE O-",-13.9479588031562,-3.50560138198192,"Suppressed","yes","G3P --> DHAP --> Acyl-DHAP --> Alkyl-DHAP --> LPA O- --> PA O- --> DAG O- --> PE O- --> LPE O-"
+"LPI --> PI --> DAG --> PE --> PC --> LPC --> LPA --> PA --> PG --> LPG","LPI","LPG",7.44847786092965,4.0797293881071,"Active","yes","LPI --> PI --> DAG --> PE --> PC --> LPC --> LPA --> PA --> PG --> LPG"
+"LPC --> PC --> PA --> PI --> DAG --> PE --> LPE","LPC","LPE",7.06990171606497,3.50817003809641,"Active","yes","LPC --> PC --> PA --> PI --> DAG --> PE --> LPE"
+"LPC --> LPA --> PA --> PI --> DAG --> PC --> PS --> PE --> LPE","LPC","LPE",6.03053710778276,3.41405877696615,"Active","yes","LPC --> LPA --> PA --> PI --> DAG --> PC --> PS --> PE --> LPE"
+"DAG --> PC --> PG --> LPG","DAG","LPG",6.70679324051367,2.96745854572933,"Active","yes","DAG --> PC --> PG --> LPG"
+"LPE --> PE --> PC --> PG","LPE","PG",6.59541018876662,2.93187314335771,"Active","yes","LPE --> PE --> PC --> PG"

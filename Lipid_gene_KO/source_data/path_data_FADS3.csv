@@ -1,0 +1,8 @@
+"path","from","to","score","cal_score","Type","Significant","rep_sub_path"
+"Serine+Palmitoyl CoA --> ketodhSPB_18:0;2 --> dhSPB_18:0;2 --> dhCer_34:0;2 --> dhSM_34:0;2","Serine+Palmitoyl CoA","dhSM_34:0;2",-9.37319151715604,-4.16866481161941,"Suppressed","yes","34:0;2"
+"Serine+Palmitoyl CoA --> ketodhSPB_18:0;2 --> dhSPB_18:0;2 --> dhCer_34:1;2 --> Cer_34:2;2 --> HexCer_34:2;2","Serine+Palmitoyl CoA","HexCer_34:2;2",-8.47892707689746,-3.65091910736183,"Suppressed","yes","34:2;2"
+"Serine+Palmitoyl CoA --> ketodhSPB_18:0;2 --> dhSPB_18:0;2 --> dhCer_34:0;2","Serine+Palmitoyl CoA","dhCer_34:0;2",-7.97752384455191,-3.51746017529226,"Suppressed","yes","18:0;2"
+"Serine+Palmitoyl CoA --> ketodhSPB_18:0;2 --> dhSPB_18:0;2 --> dhCer_44:1;2 --> Cer_44:2;2 --> HexCer_44:2;2","Serine+Palmitoyl CoA","HexCer_44:2;2",-8.00607997343314,-3.41765723574457,"Suppressed","yes","44:2;2"
+"Serine+Palmitoyl CoA --> ketodhSPB_18:0;2 --> dhSPB_18:0;2 --> dhCer_32:0;2 --> dhSM_32:0;2","Serine+Palmitoyl CoA","dhSM_32:0;2",-7.75000698971147,-3.35924295574399,"Suppressed","yes","32:0;2"
+"dhCer_42:1;2 --> Cer_42:2;2","dhCer_42:1;2","Cer_42:2;2",4.19288612376137,2.40155416627726,"Active","yes","42:2;2"
+"dhCer_44:0;2 --> Cer_44:1;2","dhCer_44:0;2","Cer_44:1;2",4.13516569892772,2.37280394687509,"Active","yes","44:1;2"

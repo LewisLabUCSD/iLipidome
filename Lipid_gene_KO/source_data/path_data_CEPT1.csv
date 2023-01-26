@@ -1,0 +1,8 @@
+"path","from","to","score","cal_score","Type","Significant","rep_sub_path"
+"LPS --> PS --> PE --> PC --> PG --> CL","LPS","CL",-8.07879331262124,-2.95231421861287,"Suppressed","yes","LPS --> PS --> PE --> PC --> PG --> CL"
+"PE --> PC --> PS --> LPS","PE","LPS",-7.54244639173478,-2.58324143698118,"Suppressed","yes","PE --> PC --> PS --> LPS"
+"LPC --> PC --> PS --> PE","LPC","PE",-6.59556568196508,-2.30289312711755,"Suppressed","yes","LPC --> PC --> PS --> PE"
+"PE --> PS","PE","PS",-5.97551264919345,-1.96066542444545,"Suppressed","yes","PE --> PS"
+"DHAP --> G3P --> LPA --> PA --> PI --> DAG --> TAG","DHAP","TAG",11.7149363439228,3.18859851687116,"Active","yes","DHAP --> G3P --> LPA --> PA --> PI --> DAG --> TAG"
+"G3P --> DHAP --> Acyl-DHAP --> Alkyl-DHAP --> LPA O- --> PA O- --> DAG O- --> PC O- --> LPC O-","G3P","LPC O-",10.5045901794588,2.83313093452347,"Active","yes","G3P --> DHAP --> Acyl-DHAP --> Alkyl-DHAP --> LPA O- --> PA O- --> DAG O- --> PC O- --> LPC O-"
+"TAG --> DAG --> PA --> LPA","TAG","LPA",9.46815246643112,2.45318246568232,"Active","yes","TAG --> DAG --> PA --> LPA"
