@@ -7,17 +7,17 @@
 - [License](#license)
 
 # Overview
-Here, we present ``iLipidome``, a novel method based on R (v 4.1.0) platform for analyzing lipidomics data in the context of the lipid biosynthetic network, thus accounting for the interdependence of measured lipids. iLipidome includes a series of functions for lipid substructure transformation, extraction, lipid biosynthetic network reconstruction, and essential pathway and reaction scoring. With three demo datasets, we demonstrated that iLipidome could enhance statistical power, enable reliable clustering and lipid enrichment analysis, and link lipidomic changes to their genetic origins. To summarize, iLipidome facilitates systems-level comparison of lipid profiles with lipid biosynthetic information efficiently and provides a deeper insight into complex lipidomic alterations across samples.
+Here, we present ``iLipidome``, a method for analyzing lipidomics data in the context of the lipid biosynthetic network, thus accounting for the interdependence of measured lipids. Currently, iLipidome only supports “two-group comparison”, enabling users to identify essential altered lipid pathways and link lipidomic changes to their genetic origins. The tutorial describes a series of iLipidome functions to facilitate systems-level comparison of fatty acid, lipid species, and lipid class profiles using a novel substructure-based approach. We hope it can provide researchers a deeper insight into complex lipidomic alterations across samples.
 
 
 # System Requirements
 ## Hardware requirements
-To run demo datasets with iLipidome, it requires only a standard computer with enough RAM and installed R software version over 4.0.0.
+To run example datasets with iLipidome, it requires only a standard computer with enough RAM and installed R software version over 4.0.0.
 
 ## Software requirements
 ### OS Requirements
-The functions and demo datasets has been tested on the following systems:
-+ macOS: Monterey (12.4)
+The functions and example datasets has been tested on the following systems:
++ macOS: Ventura (13.0)
 
 
 ### R Dependencies
@@ -26,237 +26,558 @@ The version information about R, the OS and attached or loaded packages for `iLi
 ```
 R version 4.1.0 (2021-05-18)
 Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS 12.4
+Running under: macOS 13.0
+
 Matrix products: default
 LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+
 locale:
 [1] zh_TW.UTF-8/zh_TW.UTF-8/zh_TW.UTF-8/C/zh_TW.UTF-8/zh_TW.UTF-8
+
 attached base packages:
-[1] grid      stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
 other attached packages:
- [1] cowplot_1.1.1         fpc_2.2-9             ComplexHeatmap_2.11.1
- [4] data.table_1.14.0     gtools_3.9.2          xlsx_0.6.5           
- [7] visNetwork_2.1.0      igraph_1.2.6          ggtext_0.1.1         
-[10] ggrepel_0.9.1         gridExtra_2.3         ggvenn_0.1.9         
-[13] ggpubr_0.4.0          ggsci_2.9             gplots_3.1.1         
-[16] plyr_1.8.6            forcats_0.5.1         stringr_1.4.0        
-[19] dplyr_1.0.7           purrr_0.3.4           readr_1.4.0          
-[22] tidyr_1.1.3           tibble_3.1.2          ggplot2_3.3.5        
-[25] tidyverse_1.3.1      
+ [1] gtools_3.9.2      gplots_3.1.1      MKmisc_1.8        data.table_1.14.0
+ [5] xlsx_0.6.5        visNetwork_2.1.0  igraph_1.2.6      forcats_0.5.1    
+ [9] stringr_1.4.0     dplyr_1.0.7       purrr_0.3.4       readr_1.4.0      
+[13] tidyr_1.1.3       tibble_3.1.2      ggplot2_3.3.5     tidyverse_1.3.1  
+
 loaded via a namespace (and not attached):
- [1] colorspace_2.0-2    ggsignif_0.6.3      rjson_0.2.20        ellipsis_0.3.2     
- [5] class_7.3-19        modeltools_0.2-23   mclust_5.4.9        circlize_0.4.13    
- [9] GlobalOptions_0.1.2 fs_1.5.0            gridtext_0.1.4      clue_0.3-60        
-[13] rstudioapi_0.13     flexmix_2.3-17      fansi_0.5.0         lubridate_1.7.10   
-[17] xml2_1.3.3          codetools_0.2-18    doParallel_1.0.16   robustbase_0.93-9  
-[21] jsonlite_1.7.2      rJava_1.0-6         broom_0.7.8         cluster_2.1.2      
-[25] kernlab_0.9-29      dbplyr_2.1.1        png_0.1-7           compiler_4.1.0     
-[29] httr_1.4.2          backports_1.2.1     assertthat_0.2.1    cli_3.1.0          
-[33] htmltools_0.5.1.1   tools_4.1.0         gtable_0.3.0        glue_1.6.0         
-[37] Rcpp_1.0.8.3        carData_3.0-4       cellranger_1.1.0    vctrs_0.3.8        
-[41] iterators_1.0.13    xlsxjars_0.6.1      rvest_1.0.3         lifecycle_1.0.0    
-[45] rstatix_0.7.0       DEoptimR_1.0-10     MASS_7.3-54         scales_1.1.1       
-[49] hms_1.1.0           parallel_4.1.0      RColorBrewer_1.1-2  stringi_1.6.2      
-[53] S4Vectors_0.32.3    foreach_1.5.1       caTools_1.18.2      BiocGenerics_0.40.0
-[57] shape_1.4.6         rlang_1.0.4         pkgconfig_2.0.3     prabclus_2.3-2     
-[61] matrixStats_0.61.0  bitops_1.0-7        lattice_0.20-44     htmlwidgets_1.5.4  
-[65] tidyselect_1.1.1    magrittr_2.0.1      R6_2.5.0            IRanges_2.28.0     
-[69] generics_0.1.0      DBI_1.1.1           pillar_1.6.1        haven_2.4.1        
-[73] withr_2.4.2         abind_1.4-5         nnet_7.3-16         modelr_0.1.8       
-[77] crayon_1.4.1        car_3.0-12          KernSmooth_2.23-20  utf8_1.2.1         
-[81] GetoptLong_1.0.5    readxl_1.3.1        reprex_2.0.0        digest_0.6.27      
-[85] diptest_0.76-0      stats4_4.1.0        munsell_0.5.0     
+ [1] Rcpp_1.0.8.3       lubridate_1.7.10   xlsxjars_0.6.1     assertthat_0.2.1  
+ [5] digest_0.6.27      utf8_1.2.1         R6_2.5.0           cellranger_1.1.0  
+ [9] backports_1.2.1    reprex_2.0.0       httr_1.4.2         pillar_1.6.1      
+[13] rlang_1.0.4        readxl_1.3.1       rstudioapi_0.13    htmlwidgets_1.5.4 
+[17] munsell_0.5.0      broom_0.7.8        compiler_4.1.0     modelr_0.1.8      
+[21] pkgconfig_2.0.3    htmltools_0.5.1.1  tidyselect_1.1.1   fansi_0.5.0       
+[25] crayon_1.4.1       dbplyr_2.1.1       withr_2.4.2        bitops_1.0-7      
+[29] grid_4.1.0         jsonlite_1.7.2     gtable_0.3.0       lifecycle_1.0.0   
+[33] DBI_1.1.1          magrittr_2.0.1     scales_1.1.1       KernSmooth_2.23-20
+[37] cli_3.1.0          stringi_1.6.2      fs_1.5.0           limma_3.48.3      
+[41] robustbase_0.93-9  xml2_1.3.3         ellipsis_0.3.2     generics_0.1.0    
+[45] vctrs_0.3.8        RColorBrewer_1.1-2 tools_4.1.0        glue_1.6.0        
+[49] DEoptimR_1.0-10    hms_1.1.0          colorspace_2.0-2   caTools_1.18.2    
+[53] rvest_1.0.3        rJava_1.0-6        haven_2.4.1
 ```
 
 # Installation Guide
 Users only need to install R software (https://www.r-project.org/) and required packages (This process usually takes within 30 mins).
 
-# Summary for source codes and demo datasets
-Three lipidomics datasets with their analysis codes and required data were deposited in the corresponding folders. Here, we only provided the processed lipidomics data. Detailed data preprocessing approach can be found in the manuscript. The code (.R file) for each dataset has a comprehensive analysis pipeline with step-by-step comments explaining each process. All figures and tables in the manuscipt can also be generated in the codes.
-- DHA (docosahexaenoic acid) dataset:
-  - It contains 13 membrane lipid profiles from 7 controls and 6 DHA treated rat basophilic leukemia (RBL) cells and covers 444 individual lipid species across 16 lipid classes.
-- LPCAT1 (lysophosphatidylcholine acyltransferase 1) knockout dataset:
-  - The second dataset contains 10 lipid profiles of human glioblastoma cell line (U87EGFRvIII), expressing LPCAT1 shRNA or a non-targeting control. There are 82 lipid species across 6 lipid classes and 4 free FAs (16:0, 18:1, 18:0, and 20:4) in this dataset.
-- CVD (cardiovascular disease) dataset:
-  - In this dataset, 146 plasma lipid profiles including 85 controls and 61 potential CVD patients were collected. 
-
 
 # Quick Example
-Typically, each example dataset can be finished in 10 minutes. Here is a quick run using the DHA dataset for lipid species substructure analysis. Users are able to reproduce the Fig. 4f in the manuscript.
-```diff
-library(tidyverse)
-library(plyr)
-library(gplots)
-library(ggsci)
-library(ggpubr)
-library(ggvenn)
-library(gridExtra)
-library(ggrepel)
-library(ggtext)
-library(igraph)
-library(visNetwork)
-library(xlsx)
-library(gtools)
-library(data.table)
-library(ComplexHeatmap)
-library(fpc)
-library(cowplot)
+Here is a quick run for fatty acid, lipid species, and lipid class substructure analysis using iLipidome. Before analysis, please download the files in "Documentation" folder. We also provide detailed inforamtion for each function in the documentation.
 
-# Input file path for DHA dataset
-file <- file_path
 
-# Data upload
-load(file.path(file,'Required_data/Required_function.RData'))
-load(file.path(file,'Required_data/Required_data_DHA.Rdata'))
-each_FA <- str_extract_all(char$FA_split, '\\d+:\\d+;\\d+') %>% map(.f = function(x){x[x!='0:0;0']})
-char <- char %>% mutate(each_FA=each_FA)
-# Analysis for unprocessed data
-no_sub_t <- non_processed_data_test(exp, char, 't.test', 'adj_p_value', 2:8,  9:14)
+## Source function and load required data
+Required function and data files can be found in the  "Required_function" and "Required_data" folder, respectively.
+ 
+```{r Source function and load required data}
 
-# Decompose lipids into species substructures
-# We excluded ether lipids since we doidn't know they are Alkyl (O-) or Alkenyl- (P-) linked so that we cannot map them to the pathways
-char_sel <- char[!str_detect(char$feature, 'O-'),]
-exp_sel <- exp[!str_detect(exp$feature, 'O-'),]
-sub_species <- lipid_species_substructure_transform(char_sel, FA_substructure, lipid_substructure)
-species_substructure <- sub_species[[2]] %>% map(.f = function(x){names(x) <- 1:length(x);return(x)}) %>% 
-  plyr::ldply(rbind) %>% mutate(Lipid=sub_species[[1]]) %>% 
-  dplyr::select(Lipid, everything())
-species_substructure[is.na(species_substructure)] <- ''
-colnames(species_substructure) <- c('Lipid', str_c('Unit', 1:(ncol(species_substructure)-1)))
+file <- dirname(rstudioapi::getSourceEditorContext()$path)
 
-# extract species substructures using fold changes accross conditons
-species_t <- no_sub_t[[2]] %>% filter(type=='species')
-species_sub_stop <- lipid_substructure_w_stop(species_substructure, species_t, 'species', pct_limit = 0.3)
-species_sub_stop <- list(species_sub_stop[[1]], apply(species_sub_stop[-1], MARGIN = 1, FUN = function(x){x[x!='']}))
+#Source function
+source(file.path(file,'required_function.R'))
 
-# transform lipid exp data into species substructures exp data
-species_sub_exp <- lipid_substructure_matrix(exp_sel, species_sub_stop, 'species')
+#Load required data
+load(file.path(file,'required_data.RData'))
 
-# differential expression analysis for substructures
-species_sub_exp_t <- t_test(species_sub_exp[[3]], 1:7, 8:13, 't.test', 'adj_p_value')
+```
 
-# species biosynthetic network data transformation
-species_network <- split(species_substructure[-1], seq(nrow(species_substructure)))
-species_network <- species_network %>% map(.f = function(x){x[x!='']})
-species_network <- species_network %>% map(.f = function(x){head(rep(x, each=2)[-1],-1)})
-species_network <-  matrix(unlist(species_network), ncol=2, byrow = T,dimnames = list(NULL, c('S1','P1'))) %>% 
-  as.data.frame() %>%  unique()
-species_network <- species_network %>% mutate(S1=str_replace(S1, '_FA\\d',''),
-                                              P1=str_replace(P1, '_FA\\d',''))
-species_network_data <- draw_network(species_network, species_sub_exp_t, 'no','adj_p_value')
-# essential pathway analysis for species substructures
-species_net <- species_network_data[[2]][1:2]
-colnames(species_net) <- c('S1','P1')
+## Upload lipidomics data
+
+iLipidome only requires users to upload one processed lipid expression table (data.frame) where lipids are rows and samples are columns for analysis. Lipid names should be in the first column named as "feature", and sample names are in the first row (see example below).  At least two samples in each group are required to calculate statistics. Also, data processing or normalization methods, such as missing value imputation or log transformation, may be required based on data source to achieve better results before analysis.
+
+iLipidome only requires users to upload one processed lipid expression table (data.frame) where lipids are rows and samples are columns for analysis. Lipid names should be in the first column named as “feature”, and sample names are in the first row (see example below). At least two samples in each group are required to calculate statistics. Also, data processing or normalization methods, such as missing value imputation or log transformation, may be required based on data source to achieve better results before analysis.
+
+Lipid names can be represented as:
+1. [LipidClass]_[sum of FA chain length] : [sum of FA double bonds] ; [sum of FA oxygens]
+e.g., PC_34:1;0 or TAG_52:1;0 when the exact identity of FAs is unknown.
+2. [LipidClass]_[FA1 chain length] : [FA1 double bonds] ; [FA1 oxygens]_[FA2 chain length] : [FA2 double bonds] ; [FA2 oxygens]…
+e.g., PC_16:0;0_18:1;0 or TAG_16:0;0_18:0;0_18:1;0 when the exact identity of FAs is known.
+
+Supported lipid classes, abbreviations, and corresponding FA numbers can be found in the “supported_lipid_class.csv” file. Note that lipid classes with same FA numbers (e.g., PC, PE) in same pathways (e.g., Glycerophospholipid) should have consistent lipid naming format (e.g., PC_36:0;0 and PE_34:0;0 or PC_18:0;0_18:0;0 and PE_16:0;0_18:0;0). Further, dihydrosphingolipids (dh-) specify the sphingolipids with sphingoid bases of 18:0:2 instead of 18:1:2.
+
+```{r Upload lipidomics data and process format}
+
+#Expression table of example lipidomics dataset
+exp <- read.csv(file.path(file, 'exp.csv'))
+
+head(exp)
+
+```
+
+## Process data for iLipidome inputs
+
+"build_char_table" transforms lipid expression table ("exp") into two iLipidome inputs: selected lipid expression table  ("exp_sel") and selected lipid characteristics table ("char_sel"). Note that it only considers the lipid classes recorded in the "network_node" table.
+
+```{r Upload lipidomics data and process format2}
+
+exp_sel <- build_char_table(raw_data=exp, network_node = network_node)[[1]]
+
+#selected lipid expression table
+head(exp_sel)
+
+char_sel <- build_char_table(exp, network_node = network_node)[[2]]
+
+#selected lipid characteristics table
+head(char_sel)
+
+```
+
+## Analysis for unprocessed data
+"unprocessed_data_test" uses the output of "build_char_table" to perform differential expression for three types of data: (1) lipid species, (2) fatty acids, and (3) lipid classes.
+
+```{r Analysis for unprocessed data}
+
+no_sub_t <- unprocessed_data_test(exp_data = exp_sel,
+                                  char_table = char_sel,
+                                  method = 't.test',
+                                  significant='adj_p_value',
+                                  ctrl_group = 1:7, exp_group = 8:13)
+
+#Expression tables for lipid species, fatty acids, and lipid classes
+no_sub_t[[1]] %>% head()
+
+#Statistical result table for lipid species, fatty acids, and lipid classes
+no_sub_t[[2]] %>% head()
+
+```
+
+## 1. FA substructure analysis
+Here, we provide a step-by-step process to perform FA substructure analysis using the data above and a series of functions.
+
+### 1-1. FA biosynthetic network transformation
+Firstly, the reference FA biosynthetic network is trimmed by users' data.
+ 
+```{r FA substructure analysis 1}
+
+FA_network_new <- build_FA_net(FA_network = FA_network,
+                           unprocessed_data_result = no_sub_t)
+
+#Trimmed FA biosynthetic network
+FA_network_new %>% head()
+
+```
+
+### 1-2. Decompose FAs into FA substructures
+"FA_sub_transform" decomposes FAs into FA substructures based on the FA biosynthetic network.
+ 
+```{r FA substructure analysis 2}
+
+#18:2 and 20:4 are majorly omega-6 FAs, so we only kept omega-6 forms of them.
+
+FA_substructure <- FA_sub_transform(FA_network = FA_network_new,
+                                    unprocessed_data_result = no_sub_t,
+                                    unmapped_FA = c('w9-18:2;0','w3-20:4;0'))
+
+#FA substructure table
+FA_substructure %>% head()
+
+```
+
+### 1-3. Extract FA substructures using fold changes
+"FA_sub_extract" maps FA substructures in each pathway with fold changes from the "unprocessed_data_test" result and extracts them through a backpropagated process. Specifically, the checking process starts from the last substructure (target FA) and would not stop until it meets a substructure with an opposite fold change along the biosynthetic route. One exception is the endogenous biosynthesis pathway for FAs in the upstream of palmitate (e.g., 14:0 or 12:0). Since they are synthesized as a group (2:0 to 16:0), we do not check their fold change and keep all substructures.
+
+```{r FA substructure analysis 3}
+
+FA_sub_stop <- FA_sub_extract(char_table = char_sel,
+                              FA_substructure = FA_substructure,
+                              unprocessed_data_result = no_sub_t,
+                              exact_FA='no', exo_lipid='w3-22:6;0')
+
+#lipid species
+FA_sub_stop[[1]] %>% head()
+
+#Extracted FA substructures for lipid species
+FA_sub_stop[[2]] %>% head()
+
+```
+
+### 1-4. Transform FA exp into substructure exp
+
+The function converts expression of FAs to expression of FA substructures.
+ 
+```{r FA substructure analysis 4}
+
+FA_sub_exp <- lipid_sub_matrix(exp_data = exp_sel, sub_data = FA_sub_stop,
+                               sub_type = 'FA')
+
+#FA substructure matrix encoding the frequency of each substructure 
+FA_sub_exp[[1]][1:5, 1:5]
+
+#Lipid profile
+FA_sub_exp[[2]]%>% head()
+
+#FA substructure profile
+FA_sub_exp[[3]] %>% head()
+
+```
+
+### 1-5. Differential expression analysis for FA substructures
+
+```{r FA substructure analysis 5}
+
+FA_sub_exp_t <- t_test(data = FA_sub_exp[[3]], ctrl = 1:7, exp = 8:13,
+                       method = 't.test', significant = 'adj_p_value')
+
+#Statistical result table for FA substructures
+FA_sub_exp_t %>% head()
+
+```
+
+### 1-6. Essential pathway analysis for FA substructures
+
+"path_scoring" use FA substructures to score pathways in FA biosynthetic network.
+
+```{r FA substructure analysis 6}
+
 set.seed(1)
-path_score_species <-  calculate_path_activation_node(species_net, species_sub_exp_t,
-                                                      calibrate = T, if_FA = 'no')
-top5_path <- rbind(path_score_species %>% 
-                     filter(Type=='Suppressed') %>% 
-                     arrange(cal_score) %>% .[!duplicated(.$rep_sub_path),]%>% .[1:5,],
-                   path_score_species %>% 
-                     filter(Type=='Active') %>% 
-                     .[!duplicated(.$rep_sub_path),]%>% .[1:5,])
-top5_path_fig <- top5_path
-top5_path_fig <- top5_path_fig %>% 
-  mutate(path=str_replace_all(path, ';0','')) %>% 
-  mutate(path=factor(.$path, levels = .$path)) %>% 
-  ggplot(aes(x=reorder(path, cal_score), y=cal_score, fill=path))+
-  geom_bar(stat='identity')+
-  geom_hline(yintercept = 0)+
-  geom_hline(yintercept = c(-1.96,1.96), linetype='dashed',color='gray')+
-  coord_flip()+
-  theme_bw()+
-  ###scale_y_continuous(limits = c(-7,7))+
-  scale_fill_manual(values = bluered(100)[c(1,10,20,30,40,100,90,80,70,60)])+
-  theme(legend.position='none',
-        plot.title = element_text(hjust = 0.5),
-        axis.text.y = element_text(size=8))+
-  labs(x='', y='Path score',
-       title='Top 5 representative pathways')
+path_score_FA <- path_scoring(network = FA_network_new, sub_t = FA_sub_exp_t, 
+                              calibrate = T, data_type = 'FA')
 
-# essential edges (reactions) analysis for species substructures
-species_net_w_rev <- add_rev_rection(network_edge, species_net)
+#Pathway scoring result table
+path_score_FA %>% head()
 
-# calculate perturbation score for each edge (reaction)
-perturbation_score_species <- calculate_perturbation_point(species_net_w_rev,
-                                                           species_sub_exp[[3]],
-                                                           species_sub_exp_t,
-                                                           ctrl=1:7, exp=8:13,
-                                                           stat = 'p')
-top5_rep_path <- c(path_score_species %>% filter(Type=='Active') %>% 
-                     arrange(desc(cal_score)) %>% 
-                     .[!duplicated(.$rep_sub_path),] %>% .[1:5,] %>% .$rep_sub_path
-                   ,path_score_species %>% filter(Type=='Suppressed') %>% 
-                     arrange(cal_score) %>% .[!duplicated(.$rep_sub_path),] %>% .[1:5,] %>% .$rep_sub_path)
-top5_rep_path <- path_score_species %>% filter(rep_sub_path%in%top5_rep_path, Significant=='yes') %>% 
-  .$path %>% str_split(' --> ') %>% unlist() %>% unique()
-edge_in_top5_path <- perturbation_score_species$edge_name %>% str_split(' --> ') %>% 
-  map_lgl(.f = function(x){x[1] %in% top5_rep_path && x[2] %in% top5_rep_path})
-edge_in_top5_path <- perturbation_score_species[edge_in_top5_path,]$edge_name
-top5_edge <- perturbation_score_species%>% 
-  filter(edge_name %in%edge_in_top5_path) %>% 
-  filter(p_value<0.05) %>% 
-  .[c(1:5, (nrow(.)-4):nrow(.)),] %>% 
-  mutate(edge_name=str_replace_all(edge_name,  ';0','')) %>% 
-  mutate(Edge_direction=ifelse(edge_type==Mode, 'Same as\nreaction', '')) %>% 
-  mutate(node1=str_split(.$edge_name, ' --> ') %>% map(.f = function(x){x[1]}),
-         node2=str_split(.$edge_name, ' --> ') %>% map(.f = function(x){x[2]})) %>% 
-  mutate(node1_color=ifelse(node1_log2FC>0, paste0("<i style='color:###FF0000'>", node1, ' --> ',"</i>"),
-                            paste0("<i style='color:###0000FF'>", node1, ' --> ',"</i>"))) %>% 
-  mutate(node2_color=ifelse(node2_log2FC>0, paste0("<i style='color:###FF0000'>", node2, "</i>"),
-                            paste0("<i style='color:###0000FF'>", node2, "</i>"))) %>% 
-  mutate(edge_color=paste0(node1_color,node2_color, FA_change))
-top5_edge_fig <- top5_edge %>% 
-  mutate(Edge_direction=factor(Edge_direction, levels = c("Same as\nreaction",""))) %>% 
-  mutate(Mode=factor(Mode, levels = c('Increase','Decrease'))) %>% 
-  ggplot(aes(x=perturbation_score, y=reorder(edge_name, perturbation_score), 
-             fill=Mode, color=Edge_direction))+
-  geom_bar(stat='identity', size=0.8)+
-  scale_y_discrete(
-    labels=rev(top5_edge$edge_color)
-  ) +
-  geom_vline(xintercept = 0)+
-  theme_bw()+
-  theme(legend.position = 'right', legend.box = "vertical",
-        axis.text.y = element_markdown(),
-        plot.title = element_text(hjust = 0.5))+
-  scale_fill_manual(values = rev(pal_lancet()(2)))+
-  scale_color_manual(values = c('gold','white'))+
-  labs(y='', fill='Reaction', x='Perturbation score', 
-       title='Top 5 significant edges',color='Edge type')+
-  guides(fill=guide_legend(order=1),
-         color=guide_legend(order=2))
+```
 
-# construct species biosynthetic network. To simplify, we only drew top3 pathways
-top3_rep_path <- c(path_score_species %>% filter(Type=='Suppressed') %>% 
-                     arrange(cal_score) %>% .[!duplicated(.$rep_sub_path),] %>% .[1:3,] %>% .$rep_sub_path,
-                   path_score_species %>% filter(Type=='Active')  %>% 
-                     .[!duplicated(.$rep_sub_path),] %>% .[1:3,] %>% .$rep_sub_path)
-top3_rep_path <- path_score_species %>% filter(rep_sub_path%in%top3_rep_path, Significant=='yes') %>% 
-  .$path %>% str_split(' --> ') %>% unlist() %>% unique()
-edge_in_top3_path <- perturbation_score_species$edge_name %>% str_split(' --> ') %>% 
-  map_lgl(.f = function(x){x[1] %in% top3_rep_path && x[2] %in% top3_rep_path})
-edge_in_top3_path <- perturbation_score_species[edge_in_top3_path,]$edge_name
-top3_net_edge <- species_net_w_rev %>% filter(S1 %in% top3_rep_path, P1 %in% top3_rep_path)
-top3_net_edge <- top3_net_edge %>% mutate(color='gray', arrows='to',length=100)
-colnames(top3_net_edge)[1:2] <- c('from','to')
-top3_net_node <- species_network_data[[1]] %>% 
-  filter(id %in% unlist(top3_net_edge))
-top3_net_path_col <- rbind(path_score_species %>% filter(Type=='Active') %>% 
-                             .[!duplicated(.$rep_sub_path),] %>% .[1:3,], 
-                           path_score_species %>% filter(Type=='Suppressed') %>% 
-                             arrange(cal_score) %>% .[!duplicated(.$rep_sub_path),] %>% 
-                             .[1:3,]) %>% mutate(rank=c(1,2,3,6,7,8))
-top3_net_reaction_col <- perturbation_score_species%>% 
-  filter(edge_name %in% edge_in_top3_path) %>% 
-  .[c(1:5, (nrow(.)-4):nrow(.)),] %>% 
-  filter(p_value<0.05)%>% 
-  mutate(rank=c(1:10))
-top3_net_node$label <- str_replace_all(top3_net_node$label , ';0','')
-net_edge <- path_color(top3_net_edge, top3_net_path_col,top3_net_reaction_col)
-net_node <- top3_net_node %>% filter(id %in%c(net_edge$from, net_edge$to))
-# building biosynthetic network for top 3 activa and suppressed pathways@@
-visNetwork(net_node, net_edge)
+### 1-7. Essential edges (reactions) analysis for FA substructures
+
+"reaction_scoring" evaluates each reaction in FA biosynthetic network using FA substructures.
+
+```{r FA substructure analysis 7}
+
+reaction_score_FA <- reaction_scoring(network = FA_network_new, 
+                                      sub_exp = FA_sub_exp[[3]],
+                                      sub_t = FA_sub_exp_t, 
+                                      ctrl = 1:7, exp = 8:13, 
+                                      Species = 'rat')
+
+#Reaction scoring result table
+reaction_score_FA %>% head()
+
+```
+
+### 1-8. FA biosynthetic network construction
+
+Build the FA biosynthetic network using FA substructures, pathway and reaction scoring results.
+
+```{r FA substructure analysis 8}
+
+FA_network_data <- draw_network(network_data = FA_network_new,
+                                DE_data = FA_sub_exp_t,
+                                if_species = F, significant = 'adj_p_value',
+                                path_scoring_result = path_score_FA,
+                                reaction_scoring_result = reaction_score_FA,
+                                top_n = 5, path_type = 'both')
+
+#FA biosynthetic network node
+FA_network_data[[1]] %>% head()
+
+#FA biosynthetic network edge
+FA_network_data[[2]] %>% head()
+
+#FA biosynthetic network
+visNetwork(FA_network_data[[1]],FA_network_data[[2]]) %>% 
+  visIgraphLayout(layout = "layout_with_sugiyama", type='square',
+                  physics = F, smooth = TRUE, randomSeed =5) 
+
+```
+
+## 2. Lipid species substructure analysis
+
+A similar approach can be used to analyze lipid species substructures.
+
+### 2-1. Decompose lipids into species substructures
+
+"species_sub_transform" decomposes lipids into species substructures based on the lipid biosynthetic network.
+ 
+```{r Lipid species substructure analysis 1}
+
+#We excluded ether lipids since we cannot differentiate Alkyl (O-) or Alkenyl- (P-) linked ether lipids
+
+char_wo_EL <- char_sel[!str_detect(char_sel$feature, 'O-'),]
+exp_wo_EL <- exp_sel[!str_detect(exp_sel$feature, 'O-'),]
+
+species_substructure <- species_sub_transform(char = char_wo_EL,
+                                              lipid_substructure = lipid_substructure,
+                                              network_node = network_node)
+
+
+#Lipid species substructure table
+species_substructure %>% head()
+
+```
+
+### 2-2. Extract species substructures using fold changes
+"species_sub_extract" maps species substructures in each pathway with fold changes from the "unprocessed_data_test" result and extracts them through a backpropagated process. Specifically, the checking process starts from the last substructure (target species) and would not stop until it meets a substructure with an opposite fold change along the biosynthetic route.
+
+```{r Lipid species substructure analysis 2}
+
+species_sub_stop <- species_sub_extract(lipid_substructure = species_substructure,
+                                        unprocessed_data_result =  no_sub_t,
+                                        type = 'species', pct_limit = 0.3,
+                                        exo_lipid=NULL)
+
+#Lipid species
+species_sub_stop[[1]] %>% head()
+
+#Extracted species substructures for lipid species
+species_sub_stop[[2]] %>% head()
+
+```
+
+### 2-3. Transform lipid exp into substructure exp
+
+The function converts expression of lipid species to expression of species substructures.
+ 
+```{r Lipid species substructure analysis 3}
+
+species_sub_exp <- lipid_sub_matrix(exp_data = exp_wo_EL, 
+                                    sub_data = species_sub_stop,
+                                    sub_type = 'Species')
+
+
+#Species substructure matrix encoding the frequency of each substructure 
+species_sub_exp[[1]][1:5, 1:5]
+
+#Lipid profile
+species_sub_exp[[2]] %>% head()
+
+#Species substructure profile
+species_sub_exp[[3]] %>% head()
+
+```
+
+### 2-4. Differential expression analysis for species substructures
+
+```{r Lipid species substructure analysis 4}
+
+species_sub_exp_t <- t_test(data = species_sub_exp[[3]], ctrl = 1:7, exp = 8:13,
+                            method = 't.test', significant = 'adj_p_value')
+
+
+#Statistical result table for species substructures
+species_sub_exp_t %>% head()
+
+```
+
+### 2-5. Lipid species biosynthetic network transformation
+
+"build_species_net" uses species substructures to contruct lipid biosynthetic network.
+
+```{r Lipid species substructure analysis 5}
+
+#species_substructure: Output of "species_sub_transform".
+
+species_network <- build_species_net(species_substructure = species_substructure)
+
+#Lipid species biosynthetic network
+species_network %>% head()
+
+```
+
+### 2-6. Essential pathway analysis for species substructures
+
+"path_scoring" use species substructures to score pathways in lipid species biosynthetic network.
+
+```{r Lipid species substructure analysis 6}
+
+
+set.seed(1)
+path_score_species <-  path_scoring(network = species_network,
+                                    sub_t = species_sub_exp_t,
+                                    calibrate = T, data_type = 'Species')
+
+
+#Pathway scoring result table
+path_score_species %>% head()
+
+```
+
+### 2-7. Essential edges (reactions) analysis for species substructures
+
+"add_rev_rection" completes all reversible reactions in lipid species biosynthetic network, where "reaction_scoring" evaluates each reaction using species substructures.
+
+```{r Lipid species substructure analysis 7}
+
+
+species_net_w_rev <- add_rev_rection(network_edge = network_edge,
+                                     species_net = species_network)
+
+#Lipid species biosynthetic network with complete reversible reactions
+species_net_w_rev %>% head()
+
+reaction_score_species <- reaction_scoring(network = species_net_w_rev,
+                                           sub_exp = species_sub_exp[[3]],
+                                           sub_t = species_sub_exp_t,
+                                           ctrl=1:7, exp=8:13,
+                                           Species = 'rat')
+
+#Reaction scoring result table
+reaction_score_species %>% head()
+
+```
+
+### 2-8. Lipid species biosynthetic network construction
+
+Build the lipid species biosynthetic network using species substructures, pathway and reaction scoring results.
+
+```{r Lipid species substructure analysis 8}
+
+
+species_network_data <- draw_network(network_data = species_net_w_rev,
+                                     DE_data = species_sub_exp_t,
+                                     if_species = T,significant = 'adj_p_value',
+                                     path_scoring_result = path_score_species,
+                                     reaction_scoring_result = reaction_score_species,
+                                     top_n = 3, path_type = 'both')
+
+
+
+#Lipid species biosynthetic network node
+species_network_data[[1]] %>% head()
+
+#Lipid species biosynthetic network edge
+species_network_data[[2]] %>% head()
+
+#Lipid species biosynthetic network
+visNetwork(species_network_data[[1]], species_network_data[[2]])
+
+```
+
+## 3. Lipid class substructure analysis
+
+<font size="3"> A similar approach can be used to analyze lipid class substructures.
+
+### 3-1. Extract class substructures using fold changes
+
+```{r Lipid class substructure analysis 1}
+
+class_sub_stop <- species_sub_extract(lipid_substructure =lipid_substructure,
+                                      unprocessed_data_result = no_sub_t,
+                                      type = 'class', pct_limit = 0.01,
+                                      exo_lipid=NULL)
+
+#Lipid classes
+class_sub_stop[[1]] %>% head()
+
+#Extracted class substructures for lipid classes
+class_sub_stop[[2]] %>% head()
+
+```
+
+### 3-2. Transform lipid class exp into substructure exp
+
+The function converts expression of lipid classes to expression of class substructures.
+ 
+```{r Lipid class substructure analysis 2}
+
+#Lipid class expression table.
+class_exp <- no_sub_t[[1]] %>% filter(type=='class') %>% 
+  dplyr::select(-type)
+
+class_sub_exp <- lipid_sub_matrix(exp_data = class_exp, 
+                                    sub_data = class_sub_stop,
+                                    sub_type = 'Class')
+
+
+#Class substructure matrix encoding the frequency of each substructure 
+class_sub_exp[[1]][1:5, 1:5]
+
+#Lipid class profile
+class_sub_exp[[2]] %>% head()
+
+#Class substructure profile
+class_sub_exp[[1]] %>% head()
+
+```
+
+### 3-3. Differential expression analysis for lipid class substructures
+
+```{r Lipid class substructure analysis 3}
+
+class_sub_exp_t <- t_test(data = class_sub_exp[[3]], ctrl = 1:7, exp = 8:13,
+                          method = 't.test', significant = 'adj_p_value')
+
+#Statistical result table for class substructures
+class_sub_exp_t %>% head()
+
+```
+
+### 3-4. Lipid class biosynthetic network transformation
+
+The reference lipid biosynthetic network in iLipdiome is trimmed by class substructures to build lipid class network.
+
+```{r Lipid class substructure analysis 4}
+
+class_network <- network_edge[c('S1','P1')] %>% 
+  filter(S1 %in% class_sub_exp_t$lipid, P1 %in% class_sub_exp_t$lipid)
+
+#Lipid class biosynthetic network
+class_network %>% head()
+
+```
+
+### 3-5. Essential pathway analysis for species substructures
+
+"path_scoring" use class substructures to score pathways in lipid class biosynthetic network.
+
+```{r Lipid class substructure analysis 5}
+
+set.seed(1)
+path_score_class <-  path_scoring(network = class_network,
+                                    sub_t = class_sub_exp_t,
+                                    calibrate = T, data_type = 'Class')
+
+
+#Pathway scoring result table
+path_score_class %>% head()
+
+```
+
+### 3-6. Essential edges (reactions) analysis for species substructures
+
+“reaction_scoring” evaluates each reaction in lipid class biosynthetic network using class substructures.
+
+```{r Lipid class substructure analysis 6}
+
+reaction_score_class <- reaction_scoring(network = class_network,
+                                         sub_exp = class_sub_exp[[3]],
+                                         sub_t = class_sub_exp_t,
+                                         ctrl=1:7, exp=8:13,
+                                         Species = 'rat')
+
+
+
+#Reaction scoring result table
+reaction_score_class %>% head()
+
+```
+
+### 3-7. Lipid class biosynthetic network construction
+
+Build the lipid class biosynthetic network using class substructures, pathway and reaction scoring results.
+
+```{r Lipid class substructure analysis 7}
+
+class_network_data <- draw_network(network_data = class_network,
+                                     DE_data = class_sub_exp_t,
+                                     if_species = F,significant = 'adj_p_value',
+                                     path_scoring_result = path_score_class,
+                                     reaction_scoring_result = reaction_score_class,
+                                     top_n = 3, path_type = 'both')
+
+
+#Lipid class biosynthetic network node
+class_network_data[[1]] %>% head()
+
+#Lipid class biosynthetic network edge
+class_network_data[[2]] %>% head()
+
+#Lipid class biosynthetic network
+visNetwork(class_network_data[[1]], class_network_data[[2]])
+
 ```
 
 # License
+![image](https://user-images.githubusercontent.com/13529552/215008871-40e14990-26f4-4144-a110-77ec18dca3b2.png)
