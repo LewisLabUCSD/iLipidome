@@ -580,4 +580,4 @@ visNetwork(class_network_data[[1]], class_network_data[[2]])
 ```
 
 # License
-![image](https://user-images.githubusercontent.com/13529552/215009200-cf95b3b4-90c6-4e18-8f9e-a46f44e92af5.png)
+
