@@ -1,0 +1,65 @@
+﻿Abbreviation,Full_name,Pathway,LIPIDMAPS_subclass,LIPIDMAPS_subclass_id,FA
+G3P,Glycerol-3-phosphate,Glycerophospholipid,,,0
+MAG,Monoacylglycerol,Glycerophospholipid,Monoacylglycerols [GL0101],[GL0101],1
+DAG,Diacylglycerol,Glycerophospholipid,Diacylglycerols [GL0201],[GL0201],2
+TAG,Triacylglycerol,Glycerophospholipid,Triacylglycerols [GL0301],[GL0301],3
+PA,Phosphatidic acid,Glycerophospholipid,Diacylglycerophosphates [GP1001],[GP1001],2
+PC,Phosphatidylcholine,Glycerophospholipid,Diacylglycerophosphocholines [GP0101],[GP0101],2
+PE,Phosphatidylethanolamine,Glycerophospholipid,Diacylglycerophosphoethanolamines [GP0201],[GP0201],2
+PS,Phosphatidylserine,Glycerophospholipid,Diacylglycerophosphoserines [GP0301],[GP0301],2
+PG,Phosphatidylglycerol,Glycerophospholipid,Diacylglycerophosphoglycerols [GP0401],[GP0401],2
+PI,Phosphatidylinositol,Glycerophospholipid,Diacylglycerophosphoinositols [GP0601],[GP0601],2
+LPA,Lysophosphatidic acid,Glycerophospholipid,Monoacylglycerophosphates [GP1005],[GP1005],1
+LPC,Lysophosphatidylcholine,Glycerophospholipid,Monoacylglycerophosphocholines [GP0105],[GP0105],1
+LPE,Lysophosphatidylethanolamine,Glycerophospholipid,Monoacylglycerophosphoethanolamines [GP0205],[GP0205],1
+LPS,Lysophosphatidylserine,Glycerophospholipid,Monoacylglycerophosphoserines [GP0305],[GP0305],1
+LPG,Lysophosphatidylglycerol,Glycerophospholipid,Monoacylglycerophosphoglycerols [GP0405],[GP0405],1
+LPI,Lysophosphatidylinositol,Glycerophospholipid,Monoacylglycerophosphoinositols [GP0605],[GP0605],1
+CL,Cardiolipin,Glycerophospholipid,Diacylglycerophosphoglycerophosphodiradylglycerols [GP1201],[GP1201],4
+MLCL,Monolysocardiolipin,Glycerophospholipid,Diacylglycerophosphoglycerophosphomonoradylglycerols [GP1202],[GP1202],3
+DHAP,Dihydroxyacetone phosphate,Ether lipid,,,0
+Acyl-DHAP,Acyl dihydroxyacetone phosphate,Ether lipid,,,1
+Alkyl-DHAP,Alkly dihydroxyacetone phosphate,Ether lipid,,,1
+MAG O-,Alkylmonoacylglycerol,Ether lipid,Monoalkylglycerols [GL0102],[GL0102],1
+DAG O-,Alkyldiacylglycerol,Ether lipid,"1-alkyl,2-acylglycerols [GL0202]",[GL0202],2
+TAG O-,Alkyltriacylglycerol,Ether lipid,Alkyldiacylglycerols [GL0302],[GL0302],3
+PA O-,Alkylphosphatidic acid,Ether lipid,"1-alkyl,2-acylglycerophosphates [GP1002]",[GP1002],2
+PC O-,Alkylphosphatidylcholine,Ether lipid,"1-alkyl,2-acylglycerophosphocholines [GP0102]",[GP0102],2
+PE O-,Alkylphosphatidylethanolamine,Ether lipid,"1-alkyl,2-acylglycerophosphoethanolamines [GP0202]",[GP0202],2
+LPA O-,Lysoalkylphosphatidic acid,Ether lipid,Monoalkylglycerophosphates [GP1006],[GP1006],1
+LPC O-,Lysoalkylphosphatidylcholine,Ether lipid,Monoalkylglycerophosphocholines [GP0106],[GP0106],1
+LPE O-,Lysoalkylphosphatidylethanolamine,Ether lipid,Monoalkylglycerophosphoethanolamines [GP0206],[GP0206],1
+MAG P-,Alkenylmonoacylglycerol,Ether lipid,Mono-(1Z-alkenyl)-glycerols [GL0103],[GP0103],1
+DAG P-,Alkenyldiacylglycerol,Ether lipid,1Z-alkenylacylglycerols [GL0204],[GP0204],2
+PA P-,Alkenylphosphatidic acid,Ether lipid,"1-(1Z-alkenyl),2-acylglycerophosphates [GP1003]",[GP1003],2
+PC P-,Alkenylphosphatidylcholine,Ether lipid,"1-(1Z-alkenyl),2-acylglycerophosphocholines [GP0103]",[GP0103],2
+PE P-,Alkenylphosphatidylethanolamine,Ether lipid,"1-(1Z-alkenyl),2-acylglycerophosphoethanolamines [GP0203]",[GP0203],2
+LPA P-,Lysoalkenylphosphatidic acid,Ether lipid,1Z-alkenylglycerophosphates [GP1007],[GP1007],1
+LPC P-,Lysoalkenylphosphatidylcholine,Ether lipid,1Z-alkenylglycerophosphocholines [GP0107],[GP0107],1
+LPE P-,Lysoalkenylphosphatidylethanolamine,Ether lipid,1Z-alkenylglycerophosphoethanolamines [GP0207],[GP0207],1
+Serine+Palmitoyl CoA,Serine+Palmitoyl CoA,Sphingolipid,,,0
+Cer,Ceramide,Sphingolipid,N-acylsphingosines (ceramides) [SP0201],[SP0201],2
+dhCer,Dihydroceramide,Sphingolipid,N-acylsphinganines (dihydroceramides) [SP0202],[SP0202],2
+SM,Sphingomyelin,Sphingolipid,Ceramide phosphocholines (sphingomyelins) [SP0301],[SP0301],2
+dhSM,Dihydrosphingomyelin,Sphingolipid,Ceramide phosphocholines (sphingomyelins) [SP0301],[SP0301],2
+SPB,Sphingosine,Sphingolipid,Sphing-4-enines (Sphingosines) [SP0101],[SP0101],1
+dhSPB,Dihydrosphingosine,Sphingolipid,Sphinganines [SP0102],[SP0102],1
+SPBP,Sphingosine-1-phosphate,Sphingolipid,Sphingoid base 1-phosphates [SP0105],[SP0105],1
+dhSPBP,Dihydrosphingosine-1-phosphate,Sphingolipid,Sphingoid base 1-phosphates [SP0105],[SP0105],1
+GalCer,Galactosylceramide,Sphingolipid,"Simple Glc series (GlcCer, LacCer, etc.) [SP0501]",[SP0501],2
+GlcCer,Glucosylceramide,Sphingolipid,"Simple Glc series (GlcCer, LacCer, etc.) [SP0501]",[SP0501],2
+HexCer,Hexosylceramide,Sphingolipid,"Simple Glc series (GlcCer, LacCer, etc.) [SP0501]",[SP0501],2
+LacCer,Lactosylceramide,Sphingolipid,"Simple Glc series (GlcCer, LacCer, etc.) [SP0501]",[SP0501],2
+Sulfatide,Sulfatide,Sphingolipid,Sulfoglycosphingolipids (sulfatides) [SP0602],[SP0602],2
+CerP,Ceramide-1-phosphate,Sphingolipid,Ceramide 1-phosphates [SP0205],[SP0205],2
+phCer,Phytoceramide,Sphingolipid,N-acyl-4-hydroxysphinganines (phytoceramides) [SP0203],[SP0203],2
+phSPB,Phytosphingosine,Sphingolipid,4-Hydroxysphinganines (Phytosphingosines) [SP0103],[SP0103],1
+ketodhSPB,3-Ketosphinganine,Sphingolipid,Sphinganines [SP0102],[SP0102],1
+Ganglioside,Ganglioside,Sphingolipid,GalNAcb1-4Galb1-4Glc- (Ganglio series) [SP0503],[SP0503],2
+Globoside,Globoside,Sphingolipid,GalNAcb1-3Gala1-4Galb1-4Glc- (Globo series) [SP0502],[SP0502],2
+Alanine+Palmitoyl CoA,Alanine+Palmitoyl CoA,Deoxysphingolipid,,,0
+doxketodhSPB,deoxyketosphinganine,Deoxysphingolipid,,,1
+doxdhSPB,Deoxydihydrosphingosine,Deoxysphingolipid,Sphingoid base analogs [SP0108],[SP0108],1
+doxdhCer,Deoxydihydrosphingosine,Deoxysphingolipid,,,2
+doxCer,Deoxyceramide,Deoxysphingolipid,1-deoxyceramides [SP0206],[SP0206],2
+doxSPB,Deoxysphingosine,Deoxysphingolipid,,,1

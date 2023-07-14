@@ -1,0 +1,100 @@
+﻿S1,P1,reverse
+PG,CL,0
+PG,LPG,1
+LPG,PG,1
+PC,PG,0
+PA,PI,0
+PA,PG,0
+PI,LPI,1
+PI,DAG,0
+LPI,PI,1
+PA,LPA,1
+LPA,PA,1
+PA,DAG,1
+DAG,PA,1
+LPC,LPA,0
+MAG,DAG,1
+DAG,MAG,1
+TAG,DAG,1
+DAG,TAG,1
+DAG,PC,0
+DAG,PE,0
+PS,LPS,1
+LPS,PS,1
+PS,PE,1
+PE,PS,1
+PC,PS,0
+PE,LPE,1
+PC,PA,0
+LPE,PE,1
+PE,PC,0
+PC,LPC,1
+LPC,PC,1
+CL,MLCL,1
+MLCL,CL,1
+MAG O-,LPA O-,0
+LPA O-,PA O-,0
+PA O-,DAG O-,0
+DAG O-,TAG O-,1
+TAG O-,DAG O-,1
+DAG O-,PC O-,0
+DAG O-,PE O-,0
+PC O-,LPC O-,1
+PE O-,LPE O-,1
+LPC O-,PC O-,1
+LPE O-,PE O-,1
+PE O-,PE P-,0
+PE P-,PC P-,0
+PE P-,DAG P-,0
+DAG P-,PC P-,0
+PC P-,LPC P-,1
+LPC P-,PC P-,1
+PE P-,LPE P-,1
+LPE P-,PE P-,1
+LPE P-,MAG P-,0
+LPE P-,LPA P-,0
+PE P-,PA P-,0
+G3P,LPA,0
+G3P,DHAP,1
+DHAP,G3P,1
+DHAP,Acyl-DHAP,0
+Acyl-DHAP,Alkyl-DHAP,0
+Alkyl-DHAP,LPA O-,0
+Serine+Palmitoyl CoA,ketodhSPB,0
+ketodhSPB,dhSPB,0
+dhSPB,dhSPBP,1
+dhSPB,phSPB,0
+dhSPBP,dhSPB,1
+dhSPB,dhCer,1
+dhCer,dhSPB,1
+dhCer,phCer,0
+dhCer,Cer,0
+phCer,phSPB,0
+Cer,SM,1
+Cer,CerP,1
+SM,Cer,1
+CerP,Cer,1
+Cer,SPB,1
+SPB,Cer,1
+SPB,SPBP,1
+SPBP,SPB,1
+Cer,HexCer,1
+HexCer,Cer,1
+HexCer,GlcCer,1
+HexCer,GalCer,1
+GlcCer,LacCer,1
+LacCer,GlcCer,1
+GalCer,Sulfatide,1
+Sulfatide,GalCer,1
+LacCer,Ganglioside,0
+LacCer,Globoside,0
+dhCer,dhSM,1
+dhSM,dhCer,1
+Alanine+Palmitoyl CoA,doxketodhSPB,0
+doxketodhSPB,doxdhSPB,0
+doxdhSPB,doxdhCer,0
+doxdhCer,doxCer,0
+doxCer,doxSPB,1
+doxSPB,doxCer,1
+GlcCer,HexCer,1
+GalCer,HexCer,1
